@@ -7,6 +7,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -20,26 +21,31 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
-      body: Align(
-        alignment: Alignment.centerRight,
-        child: Text(
-          "Политехнический колледж городского хозяйства",
-          style: TextStyle(color: Colors.blue, fontSize: 40, shadows: [
-            Shadow(
-              color: Colors.green,
-              offset: Offset(-50, -50),
-              blurRadius: 10,
+      body: Stack(
+        children: const [
+          Align(
+            alignment: Alignment(0, -0.9),
+            child: Text(
+              "КОЛЛЕДЖ",
+              style: TextStyle(
+                fontSize: 60,
+                fontWeight: FontWeight.w400,
+              ),
             ),
-            Shadow(
-              color: Colors.green,
-              offset: Offset(70, 70),
-              blurRadius: 15,
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              "ПКГХ",
+              style: TextStyle(
+                fontSize: 60,
+                fontWeight: FontWeight.w400,
+              ),
             ),
-          ]),
-          textAlign: TextAlign.right,
-        ),
+          ),
+        ],
       ),
     );
   }
