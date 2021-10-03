@@ -29,6 +29,9 @@ class _MyHomePageState extends State<MyHomePage> {
   String milliSecondsText = "";
   GameState gameState = GameState.readyToStart;
 
+  Timer? waitingTimer;
+  Timer? stoppableTimer;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,10 +77,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     _startWaitingTimer();
                     break;
                   case GameState.waiting:
-                    gameState = GameState.canBeStopped;
                     break;
                   case GameState.canBeStopped:
                     gameState = GameState.readyToStart;
+                    stoppableTimer?.cancel();
                     break;
                 }
               }),
@@ -117,11 +120,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _startWaitingTimer() {
     final int randomMilliSeconds = Random().nextInt(4000) + 1000;
-    Timer(Duration(milliseconds: randomMilliSeconds), () {
+    waitingTimer = Timer(Duration(milliseconds: randomMilliSeconds), () {
       setState(() {
         gameState = GameState.canBeStopped;
       });
+      _startStoppableTimer();
     });
+  }
+
+  void _startStoppableTimer() {
+    stoppableTimer = Timer.periodic(const Duration(milliseconds: 16), (timer) {
+      milliSecondsText = "${timer.tick * 16} ms";
+    });
+  }
+
+  @override
+  void dispose() {
+    waitingTimer?.cancel();
+    stoppableTimer?.cancel();
+    super.dispose();
   }
 }
 
