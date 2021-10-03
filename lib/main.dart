@@ -74,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 switch (gameState) {
                   case GameState.readyToStart:
                     gameState = GameState.waiting;
+                    milliSecondsText = "";
                     _startWaitingTimer();
                     break;
                   case GameState.waiting:
