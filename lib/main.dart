@@ -64,7 +64,20 @@ class _MyHomePageState extends State<MyHomePage> {
           Align(
             alignment: const Alignment(0, 0.9),
             child: GestureDetector(
-              onTap: () => setState(() => milliSecondsText = "149 ms"),
+              onTap: () =>
+                  setState(() {
+                    switch (gameState) {
+                      case GameState.readyToStart:
+                        gameState = GameState.waiting;
+                        break;
+                      case GameState.waiting:
+                        gameState = GameState.canBeStopped;
+                        break;
+                      case GameState.canBeStopped:
+                        gameState = GameState.readyToStart;
+                        break;
+                    }
+                  }),
               child: ColoredBox(
                 color: Colors.black26,
                 child: SizedBox(
