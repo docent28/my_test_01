@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -115,7 +116,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _startWaitingTimer() {
-    Timer(const Duration(seconds: 2), () {
+    final int randomMilliSeconds = Random().nextInt(4000) + 1000;
+    Timer(Duration(milliseconds: randomMilliSeconds), () {
       setState(() {
         gameState = GameState.canBeStopped;
       });
