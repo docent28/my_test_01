@@ -15,9 +15,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  String milliSecondsText= "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +41,7 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
           ),
-          const Align(
+          Align(
             alignment: Alignment.center,
             child: ColoredBox(
               color: Colors.black26,
@@ -43,8 +50,8 @@ class MyHomePage extends StatelessWidget {
                 width: 300,
                 child: Center(
                   child: Text(
-                    "ПКГХ",
-                    style: TextStyle(
+                    milliSecondsText,
+                    style: const TextStyle(
                       fontSize: 60,
                       fontWeight: FontWeight.w400,
                     ),
@@ -56,9 +63,7 @@ class MyHomePage extends StatelessWidget {
           Align(
             alignment: const Alignment(0, 0.9),
             child: GestureDetector(
-              onTap: () => print(
-                "Нажали",
-              ),
+              onTap: () => setState(()=>milliSecondsText="149 ms"),
               child: const ColoredBox(
                 color: Colors.black26,
                 child: SizedBox(
