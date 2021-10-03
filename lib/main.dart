@@ -130,7 +130,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _startStoppableTimer() {
     stoppableTimer = Timer.periodic(const Duration(milliseconds: 16), (timer) {
-      milliSecondsText = "${timer.tick * 16} ms";
+      setState(() {
+        milliSecondsText = "${timer.tick * 16} ms";
+      });
     });
   }
 
