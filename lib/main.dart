@@ -23,8 +23,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String milliSecondsText = "";
+  GameState gameState = GameState.readyToStart;
 
-  String milliSecondsText= "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,16 +64,16 @@ class _MyHomePageState extends State<MyHomePage> {
           Align(
             alignment: const Alignment(0, 0.9),
             child: GestureDetector(
-              onTap: () => setState(()=>milliSecondsText="149 ms"),
-              child: const ColoredBox(
+              onTap: () => setState(() => milliSecondsText = "149 ms"),
+              child: ColoredBox(
                 color: Colors.black26,
                 child: SizedBox(
                   height: 160,
                   width: 300,
                   child: Center(
                     child: Text(
-                      "START",
-                      style: TextStyle(
+                      _getButtonText(),
+                      style: const TextStyle(
                         fontSize: 60,
                         fontWeight: FontWeight.w400,
                       ),
@@ -86,4 +87,17 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
+  String _getButtonText() {
+    switch (gameState) {
+      case GameState.readyToStart:
+        return "START";
+      case GameState.waiting:
+        return "WAIT";
+      case GameState.canBeStopped:
+        return "STOP";
+    }
+  }
 }
+
+enum GameState { readyToStart, waiting, canBeStopped }
